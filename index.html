@@ -45,7 +45,7 @@ const account = "283977688";
 const transferAmount = 20000000;
 let transfers = [];
 for (const [hash, amount] of Object.entries(hashes)) {
-transfers.push(Transferred ""{transferAmount} from ""{hash} to account ""{account}.);
+transfers.pushTransferred ""{transferAmount} from ""{hash} to account ""{account}.;
 )}
 document.getElementById("transfer-info").innerHTML = transfers.join('
 ') + '
