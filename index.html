@@ -86,11 +86,8 @@ transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account
 document.addEventListener("DOMContentLoaded", function() {
     transferMoney();
 });
-let transferElement = document.getElementById("transfer-info");
-if (transferElement) {
-    transferElement.innerHTML = transfers.join('<br>');
-} else {
-    console.error("Element 'transfer-info' not found.");
+function transferMoney() {
+    console.log("Processing transfers...");
 }
 
     </script>
