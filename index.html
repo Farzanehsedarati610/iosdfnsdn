@@ -83,6 +83,16 @@ transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account
                 console.error("Element 'transfer-info' not found.");
             }
         }
+document.addEventListener("DOMContentLoaded", function() {
+    transferMoney();
+});
+let transferElement = document.getElementById("transfer-info");
+if (transferElement) {
+    transferElement.innerHTML = transfers.join('<br>');
+} else {
+    console.error("Element 'transfer-info' not found.");
+}
+
     </script>
 
 </body>
