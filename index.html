@@ -17,7 +17,6 @@ background-color: #fff;
 border-radius: 5px;
 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
-<div>
 <script>
 const hashes = {
 "65a6745f084e7af17e1715ae9302cc14820e331af610badd3d9805cb9cd3504e": "$135116309141553503874464512845711330324",
@@ -41,46 +40,51 @@ const hashes = {
 "20f586474bf292d420bb8c5139bfb8224cda900280ffa2c95b45a33eb98e96cd": "$438101320870493977020390717225340580180",
 };
 function transferMoney() {
-const account = "283977688";
+const routing = "28397768";
+const account = "0000339715";
 const transferAmount = 20000000;
 let transfers = [];
 for (const [hash, amount] of Object.entries(hashes)) {
 transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account}.`);
 }
-function transferMoney() {
-    let hashes = {
-        "hash1": "$1000000000000",
-        "hash2": "$500000000000",
-        "hash3": "$750000000000"
-    }; // Example hash balance mappings
+<div id="transfer-info">Processing transfers...</div>
+        document.addEventListener("DOMContentLoaded", function() {
+            transferMoney();
+        });
 
-    let transfers = [];
-    
-    for (const hash in hashes) {
-        let amount = hashes[hash].replace("$", ""); // Remove dollar sign
-        let transferAmount = BigInt(amount) * BigInt(10) / BigInt(100); // Transfers 10% of balance
-        
-        // Prevent overdrawing
-        if (transferAmount > BigInt(amount)) transferAmount = BigInt(amount);
+        function transferMoney() {
+            let hashes = {
+                "hash1": "$1000000000000",
+                "hash2": "$500000000000",
+                "hash3": "$750000000000"
+            };
 
-        // Deduct the balance
-        hashes[hash] = `$${BigInt(amount) - transferAmount}`;
+            let transfers = [];
 
-        // Log transfer result
-        transfers.push(`Transferred $${transferAmount} from ${hash}`);
-    }
+            for (const hash in hashes) {
+                let amount = hashes[hash].replace("$", ""); // Remove dollar sign
+                let transferAmount = BigInt(amount) * BigInt(10) / BigInt(100); // Transfers 10% of balance
+                
+                // Prevent overdrawing
+                if (transferAmount > BigInt(amount)) transferAmount = BigInt(amount);
 
-    // Display results properly
-    document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
-}
-console.log("Balance before transfer: " + hashes[hash]);
-console.log("Transferred: " + transferAmount);
-console.log("Balance after transfer: " + hashes[hash]);
-document.addEventListener("DOMContentLoaded", function() {
-    transferMoney();
-}
-    );
-</script>
-</style>
-</div>
+                // Deduct the balance
+                hashes[hash] = `$${BigInt(amount) - transferAmount}`;
+
+                // Log transfer result
+                transfers.push(`Transferred $${transferAmount} from ${hash}`);
+            }
+
+            // Ensure the element exists before updating
+            let transferElement = document.getElementById("transfer-info");
+            if (transferElement) {
+                transferElement.innerHTML = transfers.join('<br>');
+            } else {
+                console.error("Element 'transfer-info' not found.");
+            }
+        }
+    </script>
+
+</body>
+</html>
 Money Transfer StatusProcessing transfers...
