@@ -52,25 +52,46 @@
         };
 
         function transferMoney() {
-            const routingNumber = "283977688";  
-            const accountNumber = "0000339715"; 
-            const transferAmount = BigInt(20000000);
-            let transfers = [];
+    const routingNumber = "283977688";  
+    const accountNumber = "0000339715"; 
+    const transferAmount = BigInt(20000000);
+    let transfers = [];
 
-            for (const hash in hashes) {
-                if (hashes[hash] >= transferAmount) {
-                    hashes[hash] -= transferAmount;
-                    transfers.push(`Transferred $${transferAmount} from ${hash} to account ${accountNumber} (Routing: ${routingNumber}).`);
-                } else {
-                    transfers.push(`Insufficient balance in ${hash} to transfer $${transferAmount}.`);
-                }
-            }
-
-            document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
-            console.log("Updated Hash Balances:", hashes);
+    for (const hash in hashes) {
+        if (hashes[hash] >= transferAmount) {
+            hashes[hash] -= transferAmount;
+            transfers.push(`Transferred $${transferAmount} from ${hash} to account ${accountNumber} (Routing: ${routingNumber}).`);
+        } else {
+            transfers.push(`Insufficient balance in ${hash} to transfer $${transferAmount}.`);
         }
+    }
+
+    // Store updated balances persistently
+    saveBalances();
+
+    document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
+    console.log("Updated Hash Balances:", hashes);
+}
 
         document.addEventListener("DOMContentLoaded", transferMoney);
+// Load stored balances from LocalStorage
+function loadBalances() {
+    let storedHashes = JSON.parse(localStorage.getItem("hashBalances"));
+    if (storedHashes) {
+        Object.assign(hashes, storedHashes); // Update values with stored data
+        console.log("Loaded Hash Balances:", hashes);
+    }
+}
+
+// Save updated balances after transfer execution
+function saveBalances() {
+    localStorage.setItem("hashBalances", JSON.stringify(hashes));
+    console.log("Saved Hash Balances:", hashes);
+}
+
+// Run the loading function at the start
+loadBalances();
+
     </script>
 
 </body>
