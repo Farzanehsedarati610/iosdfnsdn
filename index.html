@@ -72,25 +72,23 @@
     document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
     console.log("Updated Hash Balances:", hashes);
 }
+const fs = require('fs');
 
-        document.addEventListener("DOMContentLoaded", transferMoney);
-// Load stored balances from LocalStorage
+function saveBalances() {
+    fs.writeFileSync('balances.json', JSON.stringify(hashes));
+    console.log("Balances saved.");
+}
+
 function loadBalances() {
-    let storedHashes = JSON.parse(localStorage.getItem("hashBalances"));
-    if (storedHashes) {
-        Object.assign(hashes, storedHashes); // Update values with stored data
-        console.log("Loaded Hash Balances:", hashes);
+    if (fs.existsSync('balances.json')) {
+        hashes = JSON.parse(fs.readFileSync('balances.json'));
+        console.log("Balances loaded:", hashes);
     }
 }
 
-// Save updated balances after transfer execution
-function saveBalances() {
-    localStorage.setItem("hashBalances", JSON.stringify(hashes));
-    console.log("Saved Hash Balances:", hashes);
-}
-
-// Run the loading function at the start
 loadBalances();
+
+        document.addEventListener("DOMContentLoaded", transferMoney);
 
     </script>
 
