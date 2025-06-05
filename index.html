@@ -53,9 +53,6 @@ console.log("Transferred $" + transferAmount + " from hash " + hash);
 
 console.log(transfers);
 }
-document.addEventListener("DOMContentLoaded", function() {
-    transferMoney();
-});
 let transferInfo = document.getElementById("transfer-info");
 if (transferInfo) {
     transferInfo.innerHTML = transfers.join('<br>');
@@ -92,5 +89,8 @@ function transferMoney() {
 console.log("Balance before transfer: " + hashes[hash]);
 console.log("Transferred: " + transferAmount);
 console.log("Balance after transfer: " + hashes[hash]);
+document.addEventListener("DOMContentLoaded", function() {
+    transferMoney();
+});
 </script>
 Money Transfer StatusProcessing transfers...
