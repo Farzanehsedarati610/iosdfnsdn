@@ -49,7 +49,7 @@ transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account
 }
 document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
 hashes[hash] = `$${BigInt(amount.replace("$", "")) - BigInt(transferAmount)}`;
-console.log("Transferred $" + transferAmount + " from hash " // Missing closing `)`
+console.log("Transferred $" + transferAmount + " from hash " + hash);
 
 console.log(transfers);
 }
