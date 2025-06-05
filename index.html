@@ -55,9 +55,15 @@ console.log("Transferred $" + transferAmount + " from hash " // Missing closing 
 
 console.log(transfers);
 }
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
     transferMoney();
-};
+});
+let transferInfo = document.getElementById("transfer-info");
+if (transferInfo) {
+    transferInfo.innerHTML = transfers.join('<br>');
+} else {
+    console.error("Element 'transfer-info' not found.");
+}
 
 function transferMoney() {
     let hashes = {
