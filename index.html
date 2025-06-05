@@ -47,19 +47,6 @@ let transfers = [];
 for (const [hash, amount] of Object.entries(hashes)) {
 transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account}.`);
 }
-document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
-hashes[hash] = `$${BigInt(amount.replace("$", "")) - BigInt(transferAmount)}`;
-console.log("Transferred $" + transferAmount + " from hash " + hash);
-
-console.log(transfers);
-}
-let transferInfo = document.getElementById("transfer-info");
-if (transferInfo) {
-    transferInfo.innerHTML = transfers.join('<br>');
-} else {
-    console.error("Element 'transfer-info' not found.");
-}
-
 function transferMoney() {
     let hashes = {
         "hash1": "$1000000000000",
