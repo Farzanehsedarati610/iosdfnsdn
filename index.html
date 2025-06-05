@@ -50,35 +50,22 @@
             "c1e586cecb4f643611e882c6b3638f2d51a7b6ccd4f647c305351fccde94b9b4": BigInt("257732773393903041627204096179159928621"),
             "20f586474bf292d420bb8c5139bfb8224cda900280ffa2c95b45a33eb98e96cd": BigInt("438101320870493977020390717225340580180"),
         };
+function transferMoney() {
+    const routingNumber = "283977688";  // Corrected variable name
+    const accountNumber = "0000339715"; // Corrected variable name
+    const transferAmount = 20000000;
+    let transfers = [];
 
-        function transferMoney() {
-            const account = "283977688";
-            const transferAmount = BigInt(20000000);
-            let transfers = [];
+    for (const [hash, amount] of Object.entries(hashes)) {
+        transfers.push(`Transferred $${transferAmount} from ${hash} to account ${accountNumber} (Routing: ${routingNumber}).`);
+    }
 
-            for (const hash in hashes) {
-                if (hashes[hash] >= transferAmount) {
-                    hashes[hash] -= transferAmount;
-                    transfers.push(`Transferred $${transferAmount} from ${hash} to account ${account}.`);
-                } else {
-                    transfers.push(`Insufficient balance in ${hash} to transfer $${transferAmount}.`);
-                }
-            }
+    document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
+    console.log(transfers);
+}
 
-            // Display results properly
-            const transferElement = document.getElementById("transfer-info");
-            if (transferElement) {
-                transferElement.innerHTML = transfers.join('<br>');
-            } else {
-                console.error("Element 'transfer-info' not found.");
-            }
+window.onload = transferMoney;
 
-            // Log transfer results
-            console.log("Updated Hash Balances:", hashes);
-        }
-
-        document.addEventListener("DOMContentLoaded", transferMoney);
-};
     </script>
 
 </body>
