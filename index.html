@@ -55,6 +55,36 @@ console.log("Transferred $" + transferAmount + " from hash " // Missing closing 
 
 console.log(transfers);
 }
-window.onload = transferMoney;
+window.onload = function() {
+    transferMoney();
+};
+
+function transferMoney() {
+    let hashes = {
+        "hash1": "$1000000000000",
+        "hash2": "$500000000000",
+        "hash3": "$750000000000"
+    }; // Example hash balance mappings
+
+    let transfers = [];
+    
+    for (const hash in hashes) {
+        let amount = hashes[hash].replace("$", ""); // Remove dollar sign
+        let transferAmount = BigInt(amount) * BigInt(10) / BigInt(100); // Transfers 10% of balance
+        
+        // Prevent overdrawing
+        if (transferAmount > BigInt(amount)) transferAmount = BigInt(amount);
+
+        // Deduct the balance
+        hashes[hash] = `$${BigInt(amount) - transferAmount}`;
+
+        // Log transfer result
+        transfers.push(`Transferred $${transferAmount} from ${hash}`);
+    }
+
+    // Display results properly
+    document.getElementById("transfer-info").innerHTML = transfers.join('<br>');
+}
+
 </script>
 Money Transfer StatusProcessing transfers...
